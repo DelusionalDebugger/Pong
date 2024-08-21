@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://bpx7cjkhxxue0"]
+
+[ext_resource type="Texture2D" uid="uid://fa1fyefwjs5m" path="res://art/Ball.png" id="1_ebomy"]
+[ext_resource type="Script" path="res://scripts/ball.gd" id="1_ktqen"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5i74t"]
+
+[node name="ball" type="CharacterBody2D"]
+script = ExtResource("1_ktqen")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-1.19209e-07, -1.19209e-07)
+scale = Vector2(10, 10)
+texture = ExtResource("1_ebomy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_5i74t")
+
+[node name="boundary_checks" type="Node2D" parent="."]
+
+[node name="left_check" type="RayCast2D" parent="boundary_checks"]
+target_position = Vector2(-11, 0)
+
+[node name="right_check" type="RayCast2D" parent="boundary_checks"]
+target_position = Vector2(11, 0)
+
+[node name="down_check" type="RayCast2D" parent="boundary_checks"]
+target_position = Vector2(0, 11)
+
+[node name="up_check" type="RayCast2D" parent="boundary_checks"]
+target_position = Vector2(0, -11)

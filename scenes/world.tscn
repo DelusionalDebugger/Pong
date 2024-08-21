@@ -1,0 +1,69 @@
+[gd_scene load_steps=9 format=3 uid="uid://ck30gk7dov04w"]
+
+[ext_resource type="Texture2D" uid="uid://g2sc3ogv16xm" path="res://art/Background.png" id="1_4m4rt"]
+[ext_resource type="PackedScene" uid="uid://bpx7cjkhxxue0" path="res://scenes/ball.tscn" id="2_ql220"]
+[ext_resource type="PackedScene" uid="uid://7sjmbi5atu3r" path="res://scenes/player_1.tscn" id="2_yd8g3"]
+[ext_resource type="PackedScene" uid="uid://by5al0tq7g7o2" path="res://scenes/player_2.tscn" id="3_dqj04"]
+[ext_resource type="Script" path="res://scripts/player_1_points.gd" id="3_mhjhm"]
+[ext_resource type="Script" path="res://scenes/player_2_points.gd" id="4_7co12"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i5bxy"]
+size = Vector2(1153, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ws512"]
+size = Vector2(1151.5, 90)
+
+[node name="world" type="Node"]
+
+[node name="background" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_4m4rt")
+
+[node name="ball" parent="." instance=ExtResource("2_ql220")]
+position = Vector2(571, 331)
+
+[node name="player_1_display" type="Panel" parent="."]
+offset_right = 113.0
+offset_bottom = 40.0
+
+[node name="player_1_points" type="Label" parent="player_1_display"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 67.0
+offset_bottom = 23.0
+script = ExtResource("3_mhjhm")
+
+[node name="player_2_display" type="Panel" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -157.0
+offset_bottom = 40.0
+grow_horizontal = 0
+
+[node name="player_2_points" type="Label" parent="player_2_display"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("4_7co12")
+
+[node name="player_1" parent="." instance=ExtResource("2_yd8g3")]
+position = Vector2(192, 342)
+
+[node name="player_2" parent="." instance=ExtResource("3_dqj04")]
+position = Vector2(979, 334)
+
+[node name="boundaries" type="StaticBody2D" parent="."]
+
+[node name="boundary_top" type="CollisionShape2D" parent="boundaries"]
+position = Vector2(573.5, -40)
+shape = SubResource("RectangleShape2D_i5bxy")
+
+[node name="boundary_bottom" type="CollisionShape2D" parent="boundaries"]
+position = Vector2(574, 696)
+shape = SubResource("RectangleShape2D_ws512")
